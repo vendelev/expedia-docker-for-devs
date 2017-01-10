@@ -1,0 +1,45 @@
+include::../header.adoc[]
+
+== Lesson 0: Introduction
+
+=== Docker vs Virtual Machines
+
+==== Docker registry
+
+=== Set up
+
+If you don't have docker installed yet, go to https://docs.docker.com/docker-for-mac/#/download-docker-for-mac[the Docker page] and download the dmg file.
+The easiest way then is to follow the steps provided on the https://docs.docker.com/docker-for-mac/#step-1-install-and-run-docker-for-mac[page].
+
+=== Is my set up completed?
+
+As mentioned in the official page, you should be able to a Docker icon (a small whale) in your top status bar.
+
+From a new terminal, you should be able to run the following commands:
+
+[source]
+docker --version
+
+And have something similar to `Docker version 1.12.5, build 7392c3b` as an output.
+
+==== Let's download our first image from the official registry
+For this course, we are going to use mostly the Debian base image.
+
+.Exercise
+Download the latest Debian docker image from the official registry.
+
+TIP: if you don't remember which command to run, have a look the helper via `docker help`
+
+If everything went well you should see something looking like:
+
+[source]
+----
+Using default tag: latest
+latest: Pulling from library/debian
+75a822cd7888: Pull complete
+Digest: sha256:f7062cf040f67f0c26ff46b3b44fe036c29468a7e69d8170f37c57f2eec1261b
+Status: Downloaded newer image for debian:latest
+----
+
+ifdef::solutions[]
+include::solutions.adoc[tags=downloadDebian]
