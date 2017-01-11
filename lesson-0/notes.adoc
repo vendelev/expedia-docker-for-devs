@@ -2,6 +2,11 @@ ifndef::full-version[]
 include::../headers.adoc[]
 endif::full-version[]
 
+:toc: macro
+:toc-title: What's the plan for this lesson?
+
+toc::[]
+
 == Lesson 0: Introduction
 
 === Docker vs Virtual Machines
@@ -24,7 +29,7 @@ docker --version
 
 And have something similar to `Docker version 1.12.5, build 7392c3b` as an output.
 
-==== Let's download our first image from the official registry
+=== Pulling Docker images
 For this course, we are going to use mostly the Debian base image.
 
 .Exercise
@@ -66,3 +71,41 @@ Status: Downloaded newer image for debian:jessie-slim
 ----
 
 include::solutions.adoc[tags=downloadJessie]
+
+=== Running a container
+
+A container is to an image what the cake is to a recipe.
+Now we know the recipe to create a "debian cake" let's bake!
+
+Effectively, running container means running a command in a new container.
+Containers are running a Linux environment, so run a good old bash.
+
+To start a new container we are going to use the `run` command.
+The structure of the command is the following `docker run [OPTIONS] IMAGE [COMMAND] [ARG...]`.
+
+TIP: As usual, to get more help we can always use `docker [COMMAND] --help` which would be `docker run --help` in this case.
+
+.Exercise
+Run the `/bin/bash` command, in a new `debian` container.
+What does happen?
+
+include::solutions.adoc[tags=firstRun]
+
+[[run-debian-bash, Run bash in Debian exercise]]
+.Exercise
+Run a new debian container (with a bash session) as before but attach a terminal to it
+What does happen this time?
+
+include::solutions.adoc[tags=secondRun]
+
+=== What containers are running?
+
+How to get the list of running processes from the command line?
+You would probably answer the _ps_ command and you would be right.
+Docker has the same command.
+
+.Exercise
+While you have a bash session running in a container (see the <<run-debian-bash>>).
+Open another terminal and list the current running containers.
+
+include::solutions.adoc[tags=runningContainers]
