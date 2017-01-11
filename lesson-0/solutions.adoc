@@ -1,5 +1,17 @@
 # tag::downloadDebian[]
+//How to download the latest Debian image from the official registry
+ifdef::solutions[]
 .Solution
 [source]
 docker pull debian
+endif::solutions[]
 # end::downloadDebian[]
+
+# tag::downloadJessie[]
+//How to download the Debian image tagged 'jessie' from the official registry
+ifdef::solutions[]
+.Solution
+[source]
+docker pull debian:jessie-slim
+endif::solutions[]
+# end::downloadJessie[]

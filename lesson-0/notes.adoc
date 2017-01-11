@@ -1,4 +1,6 @@
-include::../header.adoc[]
+ifndef::full-version[]
+include::../headers.adoc[]
+endif::full-version[]
 
 == Lesson 0: Introduction
 
@@ -30,16 +32,37 @@ Download the latest Debian docker image from the official registry.
 
 TIP: if you don't remember which command to run, have a look the helper via `docker help`
 
-If everything went well you should see something looking like:
-
+.Expected output
 [source]
 ----
-Using default tag: latest
+Using default tag: latest <1>
 latest: Pulling from library/debian
 75a822cd7888: Pull complete
 Digest: sha256:f7062cf040f67f0c26ff46b3b44fe036c29468a7e69d8170f37c57f2eec1261b
 Status: Downloaded newer image for debian:latest
 ----
 
-ifdef::solutions[]
+<1> As we haven't specified a specific version, Docker downloads the `latest` one
+
 include::solutions.adoc[tags=downloadDebian]
+
+==== Tags
+
+Each docker image can be tagged with a string.
+The tag is used as a version number.
+Every docker image can be represented with a tag, the naming convention is then `<image name>:<tag>`.
+The default tag is `latest`.
+
+.Exercise
+Download the debian image tagged `jessie-slim`
+
+.Expected output
+[source]
+----
+jessie-slim: Pulling from library/debian
+1a095986e25e: Pull complete
+Digest: sha256:facf8d92aeeeaff4f57d9af5897330430ebdc0cfc95d7855a0bdf9f0ff8af410
+Status: Downloaded newer image for debian:jessie-slim
+----
+
+include::solutions.adoc[tags=downloadJessie]
