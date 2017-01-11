@@ -1,3 +1,0 @@
-= Code Academy: Docker for developers
-Guillaume Scheibel<gscheibel@expedia.com>
-:sectnums:
