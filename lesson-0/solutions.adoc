@@ -32,7 +32,8 @@ endif::solutions[]
 
 # tag::secondRun[]
 //Running a bash session in a
-ifdef::solutions[]
+ifdef::solutions
+
 .Solution
 [source, subs="quotes"]
 docker run *-it* debian /bin/bash
@@ -45,7 +46,7 @@ endif::solutions[]
 # end::secondRun[]
 
 # tag::runningContainers[]
-//Running a bash session in a
+//List all the running container
 ifdef::solutions[]
 .Solution
 [source]
@@ -59,7 +60,58 @@ We can see some interesting information like:
 Container ID:: It will be useful for more precise command
 Image:: Which image the container has been made from
 Command:: Which command has ben used when the container has been started
-Status:: 
+Status:: In which state is the container
+--
 
 endif::solutions[]
 # end::runningContainers[]
+
+# tag::deleteFiles[]
+//Delete some files in a container and see what happens
+ifdef::solutions[]
+.Solution
+--
+[source]
+.In the container
+----
+rm -fr /etc
+ls /etc
+----
+
+[source]
+.In another terminal
+----
+docker run -it debian
+ls /etc
+----
+
+NOTE: You can try the same approach with creating a new file
+--
+endif::solutions[]
+# end::deleteFiles[]
+
+# tag::deleteAndRestart[]
+//Create a file, restart the container and look still there
+ifdef::solutions[]
+.Solution
+--
+[source]
+.In the container
+----
+echo "Expedia" >> myFile
+----
+
+[source]
+.In another terminal
+----
+docker ps <1>
+docker restart [CONTAINER ID]
+docker exec -it [CONTAINER ID] /bin/bash
+ls <2>
+----
+
+<1> Look up for the ID of your container
+<2> You should be able to see `myFile`
+--
+endif::solutions[]
+# end::deleteAndRestart[]

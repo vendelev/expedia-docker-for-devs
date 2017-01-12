@@ -98,7 +98,7 @@ What does happen this time?
 
 include::solutions.adoc[tags=secondRun]
 
-=== What containers are running?
+=== Which containers are running?
 
 How to get the list of running processes from the command line?
 You would probably answer the _ps_ command and you would be right.
@@ -109,3 +109,26 @@ While you have a bash session running in a container (see the <<run-debian-bash>
 Open another terminal and list the current running containers.
 
 include::solutions.adoc[tags=runningContainers]
+
+=== Container's filesystem
+
+What does happen when in a VM you delete the `/bin`?
+You pray there is a snapshot somewhere!
+
+In the container world, each container is independent and non-persistent.
+It means if you're running a container, you can delete some part of the filesystem and you'll still be able to create new instances of the image.
+The corollary is, if you create a file locally and start container, your file won't be there.
+
+.Exercise
+Take a running debian container.
+Delete some core files (like /etc for instance).
+In another terminal, start a container of the same type
+
+include::solutions.adoc[tags=deleteFiles]
+
+.Exercise
+In a container, create or delete a file but this time restart the container instead of creating a new one.
+
+TIP: Have a look at `docker restart` and `docker exec`
+
+include::solutions.adoc[tag=deleteAndRestart]
