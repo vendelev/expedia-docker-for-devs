@@ -29,6 +29,8 @@ docker --version
 
 And have something similar to `Docker version 1.12.5, build 7392c3b` as an output.
 
+TIP: You can easily install Docker command completion by following https://docs.docker.com/compose/completion/#/bash[this] steps
+
 === Pulling Docker images
 For this course, we are going to use mostly the Debian base image.
 
