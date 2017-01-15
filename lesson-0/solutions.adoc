@@ -32,7 +32,7 @@ endif::solutions[]
 
 # tag::secondRun[]
 //Running a bash session in a
-ifdef::solutions
+ifdef::solutions[]
 
 .Solution
 [source, subs="quotes"]
