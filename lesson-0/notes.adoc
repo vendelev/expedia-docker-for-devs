@@ -20,7 +20,7 @@ Docker uses all the resources of your host machine and it just creates an isolat
 This approach is lighter and much faster.
 Of course there are other cool features of Docker that make it a great tool, but will go through them during this course.
 
-image::https://i.imgur.com/MJHfm1c.jpg[]
+image::docker_vs_vm.jpg[]
 
 If you want more details about the differences between Docker and VMs you could read https://blog.docker.com/2016/03/containers-are-not-vms/[this] or https://devops.com/docker-vs-vms/[this] articles.
 
