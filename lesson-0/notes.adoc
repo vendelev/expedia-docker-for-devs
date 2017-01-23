@@ -11,6 +11,19 @@ toc::[]
 
 === Docker vs Virtual Machines
 
+You may wondering why you should learn Docker when you already know what is a VM and how to use it to encapsulate and run an application.
+
+When you create a VM you need to emulate every component of the machine, you should install a full OS and you should configure it to run your service.
+Of course you can use provisioning tools but is still time consuming, resource heavy and, most of all, it doesn't feel good when you are building micro services.
+
+Docker uses all the resources of your host machine and it just creates an isolated filesystem (using https://en.wikipedia.org/wiki/UnionFS[UFS]) where to run your service.
+This approach is lighter and much faster.
+Of course there are other cool features of Docker that make it a great tool, but will go through them during this course.
+
+image::docker_vs_vm.jpg[]
+
+If you want more details about the differences between Docker and VMs you could read https://blog.docker.com/2016/03/containers-are-not-vms/[this] or https://devops.com/docker-vs-vms/[this] articles.
+
 ==== Docker registry
 
 === Set up
