@@ -1,6 +1,9 @@
 :full-version:
 :imagesdir: ./material/images/
 :stylesheet: ./expedia.css
+:toclevels: 1
+:toc: macro
+
 include::headers.adoc[]
 
 // tag::intro[]
@@ -13,4 +16,7 @@ We will cover:
 * Docker swarm
 // end::intro[]
 
+toc::[]
+
 include::lesson-0/notes.adoc[]
+include::lesson-1/notes.adoc[]
