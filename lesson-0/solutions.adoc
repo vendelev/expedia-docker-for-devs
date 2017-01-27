@@ -74,15 +74,15 @@ ifdef::solutions[]
 [source]
 .In the container
 ----
-rm -fr /etc
-ls /etc
+rm -fr /media
+ls /media
 ----
 
 [source]
 .In another terminal
 ----
 docker run -it debian
-ls /etc
+ls /media
 ----
 
 NOTE: You can try the same approach with creating a new file

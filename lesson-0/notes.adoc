@@ -1,11 +1,10 @@
 ifndef::full-version[]
 include::../headers.adoc[]
-endif::full-version[]
-
 :toc: macro
 :toc-title: What's the plan for this lesson?
 
 toc::[]
+endif::full-version[]
 
 == Lesson 0: Introduction
 
@@ -20,7 +19,7 @@ Docker uses all the resources of your host machine and it just creates an isolat
 This approach is lighter and much faster.
 Of course there are other cool features of Docker that make it a great tool, but will go through them during this course.
 
-image::docker_vs_vm.jpg[]
+image::docker_vs_vm.jpg[align="center"]
 
 If you want more details about the differences between Docker and VMs you could read https://blog.docker.com/2016/03/containers-are-not-vms/[this] or https://devops.com/docker-vs-vms/[this] articles.
 
@@ -28,8 +27,8 @@ If you want more details about the differences between Docker and VMs you could 
 
 === Set up
 
-If you don't have docker installed yet, go to https://docs.docker.com/docker-for-mac/#/download-docker-for-mac[the Docker page] and download the dmg file.
-The easiest way then is to follow the steps provided on the https://docs.docker.com/docker-for-mac/#step-1-install-and-run-docker-for-mac[page].
+If you don't have docker installed yet, go to the Docker page https://docs.docker.com/docker-for-mac/[for Mac] or https://docs.docker.com/docker-for-windows/[for Windows] and download the installation file.
+The easiest way then is to follow the steps provided on the page (https://docs.docker.com/docker-for-mac/#step-1-install-and-run-docker-for-mac[for Mac] or https://docs.docker.com/docker-for-windows/#/step-1-install-docker-for-windows[for Windows]).
 
 === Is my set up completed?
 
@@ -136,7 +135,7 @@ The corollary is, if you create a file locally and start container, your file wo
 
 .Exercise
 Take a running debian container.
-Delete some core files (like /etc for instance).
+Delete some files (like /media for instance).
 In another terminal, start a container of the same type
 
 include::solutions.adoc[tags=deleteFiles]

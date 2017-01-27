@@ -20,4 +20,4 @@ docker images
 
 Run a container and attach to terminal
 [source]
-docker run -it IMAGE /bon/bash
+docker run -it IMAGE /bin/bash
