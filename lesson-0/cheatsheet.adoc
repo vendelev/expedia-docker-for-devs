@@ -1,4 +1,4 @@
-include::../header.adoc[]
+include::../headers.adoc[]
 
 == Useful commands to remember
 
