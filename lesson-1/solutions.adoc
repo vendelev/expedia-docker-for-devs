@@ -12,10 +12,10 @@ exit <3>
 docker commit [CONTAINER_ID] <4>
 ----
 
-<1> Start a new Debian based container.
+<1> Start a new Debian based container and allocate a new pseudo TTY (with the -it flag).
 <2> Create the folder
 <3> Detach from the container
-<4> Committing a new layer on top of the default debian image
+<4> Commit a new layer on top of the default debian image
 
 NOTE: The Docker engine outputs the unique id of that new image.
 endif::solutions[]

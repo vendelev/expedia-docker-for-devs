@@ -28,7 +28,7 @@ Each layer represents a - read-only - diff of the filesystem.
 .Example of an image's layer
 image::image-layers.jpg[align="center"]
 
-When we create a container how out of an image, the Docker engine adds an extra read/write filesystem layer.
+When we create a container out of an image, the Docker engine adds an extra read/write filesystem layer.
 
 === How to create a new layer?
 
@@ -52,7 +52,7 @@ You have 2 easy ways to find it:
 
 .Expected result
 The docker engine should output the ID of the new image.
-We will look like:
+It will look like:
 
 [source, subs="attributes, verbatim"]
 sha256: {new-image-id} <1>
