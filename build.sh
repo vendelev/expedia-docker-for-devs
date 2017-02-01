@@ -22,3 +22,5 @@ echo "Publish to ewegithub pages"
 git add public/
 git commit public/ -m "Publish new version"
 git push origin `git subtree split --prefix public gh-pages`:refs/heads/gh-pages --force
+git checkout master
+git branch -D gh-pages
