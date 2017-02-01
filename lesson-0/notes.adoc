@@ -28,7 +28,7 @@ If you want more details about the differences between Docker and VMs you could 
 === Set up
 
 If you don't have docker installed yet, go to the Docker page https://docs.docker.com/docker-for-mac/[for Mac] or https://docs.docker.com/docker-for-windows/[for Windows] and download the installation file.
-The easiest way then is to follow the steps provided on the page (https://docs.docker.com/docker-for-mac/#step-1-install-and-run-docker-for-mac[for Mac] or https://docs.docker.com/docker-for-windows/#/step-1-install-docker-for-windows[for Windows]).
+The easiest way then is to follow the steps provided on the page (https://docs.docker.com/docker-for-mac/\#step-1-install-and-run-docker-for-mac[for Mac] or https://docs.docker.com/docker-for-windows/\#/step-1-install-docker-for-windows[for Windows]).
 
 === Is my set up completed?
 
