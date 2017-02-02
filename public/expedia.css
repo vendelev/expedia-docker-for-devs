@@ -686,4 +686,6 @@ b.conum * { color: inherit !important; }
 
 .conum:not([data-value]):empty { display: none; }
 
+body { text-align: justify; }
+
 .logos .content { display: flex; flex-flow: row wrap; justify-content: space-around; }
