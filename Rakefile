@@ -23,18 +23,23 @@ task :generate_course, [:output_dir, :with_solutions] do |t, args|
 end
 
 task :generate, [:output_dir, :with_solutions, :lesson] do |t, args|
+  solutions = args.with_solutions == "true"
   file_name = args.lesson
-  file_name += "-with_solutions" if args.with_solutions == "true"
+  file_name += "-with_solutions" if solutions
   file_name += ".html"
+
+  attributes = {
+    'toc' => 'macro',
+    'stylesdir' => args.output_dir,
+    'stylesheet' => 'expedia.css',
+    'imagesdir' =>  'material/images/'
+  }
+
+  attributes['solutions'] = solutions if solutions
 
   Asciidoctor.convert_file args.lesson+"/notes.adoc",
     :safe => 'unsafe',
     :to_dir => args.output_dir,
     :to_file => file_name,
-    :attributes => {
-      'solutions' => args.with_solutions,
-      'stylesdir' => args.output_dir,
-      'stylesheet' => 'expedia.css',
-      'imagesdir' =>  'material/images/'
-    }
+    :attributes => attributes
 end
