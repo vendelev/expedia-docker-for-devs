@@ -11,10 +11,15 @@ rm -f $OUTPUT_DIR/*.html
 
 
 echo "Generate asciidoctor documentation"
-rake generate_lesson[$OUTPUT_DIR,"lesson-0",true]
-rake generate_lesson[$OUTPUT_DIR,"lesson-0",false]
-rake generate_lesson[$OUTPUT_DIR,"lesson-1",true]
-rake generate_lesson[$OUTPUT_DIR,"lesson-1",false]
+
+lessons=("lesson-0" "lesson-1" "lesson-2")
+
+for i in "${lessons[@]}"
+do
+rake generate_lesson[$OUTPUT_DIR,$i,true]
+rake generate_lesson[$OUTPUT_DIR,$i,false]
+done
+
 rake generate_course[$OUTPUT_DIR,true]
 rake generate_course[$OUTPUT_DIR,false]
 

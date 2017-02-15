@@ -1,9 +1,10 @@
 ifndef::full-version[]
 include::../headers.adoc[]
-endif::full-version[]
-
 :toc: macro
 :toc-title: What's the plan for this lesson?
+
+toc::[]
+endif::full-version[]
 
 == Lesson X: <Title>
 
