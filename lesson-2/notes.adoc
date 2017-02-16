@@ -131,7 +131,7 @@ RUN ["executable", "param1", "param2"] <2>
 ----
 
 <1> This form only run the <command> in a `sh` shell
-<2> If you want to run a command like `/bin/bash -c <doSomething>`, use that form (`RUN ["/bin/bash", "c", "<doSomething>"]`).
+<2> If you want to run a command like `/bin/bash -c <doSomething>`, use that form (`RUN ["/bin/bash", "-c", "<doSomething>"]`).
 
 .Exercise
 Add a new layer by creating a `logs` folder under `/opt` and build the image.
