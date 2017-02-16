@@ -8,6 +8,22 @@ endif::full-version[]
 
 == Lesson 2: The Dockerfile
 
+=== A quick recap about Docker Images
+
+A Docker Images is made up of filesystems layered over each other.
+At the base there is a boot filesystem, _bootfs_, on top of it there is the _rootfs_, our Operation System (eg. Debian).
+At this point we can add other layers to compose our final _image_, each of this layers are _read-only_ images.
+When we finally run our container (_docker run <image name>_), we are just adding a new _read-write_ layer on top of our _read-only_ layers pile.
+
+image::image-layers-2.png[width="400px",align="center"]
+
+In lesson 1 we built our _image_ using the _docker commit_ command.
+This approach can be useful for quick tests or to apply minor changes to an existing _image_, but generally when we start building more complex images we have a better option.
+
+In this lesson we are going to learn how to generate a Docker image starting from a *Dockerfile*.
+A _Dockerfile_ is a simple text file using a basic DSL (Domain Specific Language).
+This approach is usually recommended because it provides a more repeatable mechanism to create images.
+
 === Dockerfile and images
 
 A Dockerfile is effectively a text file describing a set of instructions to execute when the image is being built.
