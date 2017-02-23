@@ -83,14 +83,14 @@ This operation is possible via the https://docs.docker.com/engine/reference/buil
 
 Let's take the following Dockerfile:
 
-include::docfiles/sharedVolume[lines=1..4]
+include::dockerfiles/sharedVolume[lines=1..4]
 
 To expose `/opt/logs`, we can use the `VOLUME` instruction.
 The syntax is either `VOLUME ["folder1", "folder2"]` or `VOLUME folder1 folder2`.
 
 Which gives in our case:
 
-include::docfiles/sharedVolume[]
+include::dockerfiles/sharedVolume[]
 
 ===== Sharing
 
