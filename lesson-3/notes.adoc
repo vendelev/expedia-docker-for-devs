@@ -1,0 +1,29 @@
+ifndef::full-version[]
+include::../headers.adoc[]
+:toc: macro
+:toc-title: What's the plan for this lesson?
+
+toc::[]
+endif::full-version[]
+
+== Lesson 3: The Dockerfile - part 2
+
+=== Dockerfile instructions: EXPOSE and VOLUME
+
+One of the main feature of Docker is the _isolation_ of containers.
+A running _container_, by default, can't communicate with other containers or with the host machine.
+Furthermore, once you created an _image_, you can only read and write files within the running _container_.
+
+Imagine now that you have two containers, one running a service on *port 8080* and the other one wants to access it.
+As we said, the first container doesn't expose any port by default, but we can easily solve this issue by adding the *EXPOSE* instruction to our _Dockerfile_.
+
+image::docker-turtles-communication.jpg[width="400px",align="center"]
+
+We can now communicate over network with our _container_, but what if we would like to share some data?
+We just need to add the *VOLUME* instruction to our _Dockerfile_.
+A _volume_ is a special kind of directory that provides several useful features:
+- Volumes can be shared and reused between containers.
+- A container doesn't have to be running to share its volumes.
+- Changes to a volume are made directly.
+- Changes to a volume will not be included when you update an image.
+- Volumes persist until no containers use them.
