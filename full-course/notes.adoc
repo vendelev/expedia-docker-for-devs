@@ -18,3 +18,5 @@ toc::[]
 
 include::../lesson-0/notes.adoc[]
 include::../lesson-1/notes.adoc[]
+include::../lesson-2/notes.adoc[]
+include::../lesson-3/notes.adoc[]
