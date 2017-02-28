@@ -14,9 +14,6 @@ One of the main feature of Docker is the _isolation_ of containers.
 A running _container_, by default, can't communicate with other containers or with the host machine.
 Furthermore, once you created an _image_, you can only read and write files within the running _container_.
 
-Imagine now that you have two containers, one running a service on *port 8080* and the other one wants to access it.
-As we said, the first container doesn't expose any port by default, but we can easily solve this issue by adding the *EXPOSE* instruction to our _Dockerfile_.
-
 image::docker-turtles-communication.jpg[width="400px",align="center"]
 
 We can now communicate over network with our _container_, but what if we would like to share some data?
@@ -133,82 +130,3 @@ fromContainerOne  fromContainerTwo
 include::solutions.adoc[tags=exposedVolume]
 
 NOTE: We can even have one of those container sharing a volume with the host and then the sharing can be done among the three parts.
-
-=== Port Mapping
-
-When you have an application like a web server running in a container, you may want to access it.
-
-Traditionally, http servers listen on port 80, 443 (or 8080 and 8433).
-But what would happen if 2 container were running the same http server?
-If you try to run 2 nginx servers locally, the second run will fail showing a "port already bind" error.
-
-For container, the concept of port mapping help to define which port from the host will be to communicate with the exposed port of the container.
-
-:host_port: 12345
-:container_port: 80
-As said, nginx runs by default on port {container_port}, we can map it with a port from our host (like {host_port}).
-So if we want to access the nginx inside of the container we can use `http://localhost:{host_port}`.
-
-Ports are being mapped when container are started using `-p <host_port>:<container_port>`.
-In the example above it would be `-p {host_port}:{container_port}`.
-
-.Exercise
-Run a container from the `nginx` image (pull it from the registry) with a port mapping and try to access the nginx server (use "/" to get the Welcome page).
-
-.Expected output
-While a curl (or equivalent):
-
-[source]
-----
-$ http localhost:12345 -h
-HTTP/1.1 200 OK
-Accept-Ranges: bytes
-Connection: keep-alive
-Content-Length: 612
-Content-Type: text/html
-Date: Thu, 23 Feb 2017 00:17:56 GMT
-ETag: "58a323e4-264"
-Last-Modified: Tue, 14 Feb 2017 15:36:04 GMT
-Server: nginx/1.11.10
-----
-
-NOTE: Use `-d` to run the container in background
-
-include::solutions.adoc[tags=exposedPort]
-
-=== Port exposition
-
-If you want your custom image to expose a port, you have to explicitly expose it via the https://docs.docker.com/engine/reference/builder/#/expose[EXPOSE] instruction.
-The syntax is simple `EXPOSE <port>`.
-Several ports can be exposed either by using the `EXPOSE` instruction several times or using `EXPORT <port1> <port2> ....`
-
-.Exercise
-Create a docker image based on debian, install nginx, expose port 80 and that the server at runtime.
-Then repeat the previous exercise.
-
-.Expected output
-After having created the image, you should be able to do:
-
-[source]
-----
-$ docker run -d -p 12345:80 docker4devs:nginx
-
-$ http localhost:12345 -h
-HTTP/1.1 200 OK
-Connection: keep-alive
-Content-Encoding: gzip
-Content-Type: text/html
-Date: Thu, 23 Feb 2017 00:46:47 GMT
-Last-Modified: Thu, 23 Feb 2017 00:36:11 GMT
-Server: nginx/1.6.2
-Transfer-Encoding: chunked
-----
-
-[TIP]
---
-To install nginx, use those commands: `apt-get update` and `apt-get install -y ngnix`.
-
-To start the web server: `nginx -g 'daemon off;'`
---
-
-include::solutions.adoc[tags=customNginx]
