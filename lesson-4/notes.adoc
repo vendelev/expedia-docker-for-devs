@@ -6,7 +6,7 @@ include::../headers.adoc[]
 toc::[]
 endif::full-version[]
 
-== Lesson 4: Containers and web applications
+== Lesson 4: More instructions ...
 
 === Not that isolated
 
@@ -15,7 +15,7 @@ When you want to build an image to support a application lifecycle
 If you have two containers, one running a service on *port 8080* and the other one wants to access it.
 As we said, the first container doesn't expose any port by default, but we can easily solve this issue by adding the *EXPOSE* instruction to our _Dockerfile_.
 
-=== Port Mapping
+==== Port Mapping
 
 When you have an application like a web server running in a container, you may want to access it.
 
@@ -57,7 +57,7 @@ NOTE: Use `-d` to run the container in background
 
 include::solutions.adoc[tags=exposedPort]
 
-=== Port exposition
+==== Port exposition
 
 If you want your custom image to expose a port, you have to explicitly expose it via the https://docs.docker.com/engine/reference/builder/#/expose[EXPOSE] instruction.
 The syntax is simple `EXPOSE <port>`.
