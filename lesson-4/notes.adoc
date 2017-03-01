@@ -145,5 +145,41 @@ include::solutions.adoc[tags=nginxWithCustomFile]
 [NOTE]
 --
 The https://docs.docker.com/engine/reference/builder/#/add[ADD] instruction works the same way.
-The only difference is it supports URL and can uncompress archives.
+The only difference being it supports URLs and can uncompress archives.
 --
+
+=== Navigating in the filesystem
+
+To navigate in the filesystem, we could `cd` but having a set of `RUN cd /path/ && command;` is not really maintainable, readable and easy to troubleshoot.
+
+That's why we have the https://docs.docker.com/engine/reference/builder/#workdir[WORKDIR] instruction.
+
+This instruction set the working directory and will affect the other "path" based instructions such as RUN, CMD, COPY, ADD, etc.
+The syntax is very easy `WORKDIR /path/to/workdir`.
+The path can be either absolute or relative.
+
+[NOTE]
+--
+WORKDIR can support environment variable.
+For example:
+
+:logspath: /opt/logs
+[source, subs=attributes]
+----
+ENV LOGSPATH {logspath}
+WORKDIR $LOGSPATH
+RUN pwd
+----
+
+Will output `{logspath}`
+--
+
+.Exercise
+Based on the previous image, move to `/var/www/html` before doing the copy instruction.
+
+.Expected output
+The result should be the same as the previous exercise.
+
+TIP: Don't forget to update the COPY instruction to reflect move.
+
+include::solutions.adoc[tags=nginxWithCustomFileAndWorkdir]
