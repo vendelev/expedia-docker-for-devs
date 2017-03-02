@@ -61,7 +61,7 @@ include::solutions.adoc[tags=exposedPort]
 
 If you want your custom image to expose a port, you have to explicitly expose it via the https://docs.docker.com/engine/reference/builder/#/expose[EXPOSE] instruction.
 The syntax is simple `EXPOSE <port>`.
-Several ports can be exposed either by using the `EXPOSE` instruction several times or using `EXPORT <port1> <port2> ....`
+Several ports can be exposed either by using the `EXPOSE` instruction several times or using `EXPOSE <port1> <port2> ....`
 
 .Exercise
 Create a docker image based on debian, install nginx, expose port 80 and that the server at runtime.
@@ -87,7 +87,7 @@ Transfer-Encoding: chunked
 
 [TIP]
 --
-To install nginx, use those commands: `apt-get update` and `apt-get install -y ngnix`.
+To install nginx, use those commands: `apt-get update` and `apt-get install -y nginx`.
 
 To start the web server: `nginx -g 'daemon off;'`
 --
