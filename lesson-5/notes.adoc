@@ -40,7 +40,7 @@ services: <2>
 NOTE: As the file is yaml (or yml) based, the indentation is important.
 
 
-==== Up and running
+=== Up and running
 
 :imageName: docker4devs:nginx
 During the previous lesson, we created our own custom nginx image `{imageName}`.
@@ -142,7 +142,7 @@ TIP: If you want to rebuild each time, add the `--build` to the `docker-compose 
 
 TIP: If you only want to build, use `docker-compose build`.
 
-==== More volumes sharing
+=== More volumes sharing
 
 We've seen previously we can share volumes between containers with the `--volumes-from` argument.
 The same thing can be done with Compose.
