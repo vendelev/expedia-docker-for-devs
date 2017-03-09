@@ -12,7 +12,7 @@ rm -f $OUTPUT_DIR/*.html
 
 echo "Generate asciidoctor documentation"
 
-lessons=("lesson-0" "lesson-1" "lesson-2" "lesson-3" "lesson-4")
+lessons=("lesson-0" "lesson-1" "lesson-2" "lesson-3" "lesson-4" "lesson-5")
 
 for i in "${lessons[@]}"
 do
