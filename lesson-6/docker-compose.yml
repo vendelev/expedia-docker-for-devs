@@ -1,0 +1,20 @@
+version: '3.0'
+
+services:
+  db:
+    build:
+      context: ./db
+    image: local/redis:1
+    ports:
+      - "6379:6379"
+    volumes: 
+      - "$PWD/logs:/logs"
+      - "$PWD/db2:/db"
+  app:
+    build:
+      context: ./app
+    image: local/app:1
+    links: 
+      - db
+    volumes: 
+      - "$PWD/logs:/logs"
