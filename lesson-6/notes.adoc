@@ -43,7 +43,7 @@ ONBUILD RUN npm install && npm cache clean
 ONBUILD COPY . /usr/src/app
 ----
 
-==== The ARG instruction
+=== The ARG instruction
 
 The ARG instruction defines variables that can be passed at build-time via the _docker build_ command. This is done using the --build-arg flag. You can only specify build-time arguments that have been defined in the _Dockerfile_.
 
