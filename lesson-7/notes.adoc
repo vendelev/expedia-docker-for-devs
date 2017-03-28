@@ -46,7 +46,7 @@ NOTE: At this stage, you should already have a docker image published into the d
 
 You should be able to access https://marathon.stockyard.karmalab.net/ui/#/apps[Marathon UI] and see.
 
-image::marathon-UI.png[]
+image::marathon-UI.png[align=center]
 
 From this interface we are going to configure our awesome application.
 At this stage an application represents a long-running service, of which there would be many instances running on multiple hosts.
@@ -59,7 +59,7 @@ On the top right corner of the page there is a blue button "Create Application",
 
 You should be able to see the following modal
 
-image::new-app-modal.png[]
+image::new-app-modal.png[align=center]
 
 As our application is very simple we won't tweak the parameter to much.
 
@@ -74,7 +74,7 @@ Under the `Docker container` section we are going to provide 2 information:
 For the port mapping section, as we have selected a `Bridge` strategy all we have to do is to provide the ports exposed by the container and Marathon will then assign a host port.
 Following the example, my `nginx` container is listening (and exposing) its port 80 so the configuration will simply be:
 
-image::port-exposing.png[]
+image::port-exposing.png[align=center]
 
 Finally, but optional, we can add some health check capability to our application.
 For example, I know if send an HTTP request to my application targeting `/` (root path) and it responds under 300ms then the application is "healthy".
@@ -88,7 +88,7 @@ If you have added an health check, it will mark it (normally) as `healthy`.
 
 Looking overall like
 
-image::up-and-running.png[]
+image::up-and-running.png[align=center]
 
 ==== How to test my application?
 
@@ -99,7 +99,7 @@ If you look carefully there is a link under your application instance ID
 
 In this example
 
-image::marathon-instance.png[]
+image::marathon-instance.png[align=center]
 
 The instance ID is `code-academy-docker4devs_gscheibel-nginx.9379f2ef-13f4-11e7-99bf-1402ec34bda8` while the exposed endpoint is `chlxmesosslv007.karmalab.net:31212`.
 
@@ -109,7 +109,7 @@ NOTE: By default the endpoint link uses HTTPS, don't forget to change it if your
 
 IF everything correctly we can expect:
 
-image::it-works.png[]
+image::it-works.png[align=center]
 
 === Amazon EC2 Container Service (ECS)
 
