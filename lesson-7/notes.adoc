@@ -1,0 +1,129 @@
+ifndef::full-version[]
+include::../headers.adoc[]
+:toc: macro
+:toc-title: What's the plan for this lesson?
+
+toc::[]
+endif::full-version[]
+
+== Lesson 7: Launch it and watch it fly
+
+Since the beginning of this course we learn how to create images and how to run containers.
+The last part of our journey is going to our deployment.
+
+As we know, containers are an interesting solution to run an application but when comes the time to go to production we have to think about resiliency, monitoring etc.
+In this lesson we going to talk specifically 2 cluster management solutions: Mesos/Marathon and Amazon ECS.
+
+The goal is to deploy manually our application in both of these solutions.
+Even if in _real life_ we would automate the deployment processes using each solutions API (like what Primer is doing for EWE).
+
+NOTE: There are several other solutions like Kubernetes but we won't have the time work with them.
+
+=== Mesos / Marathon
+
+[quote, Mesos documentation]
+Apache Mesos abstracts CPU, memory, storage, and other compute resources away from machines (physical or virtual), enabling fault-tolerant and elastic distributed systems to easily be built and run effectively.
+
+http://mesos.apache.org/[Mesos] allows developers to _see_ a cluster of machines as if it was a single machine.
+It takes care of the downstream resource management.
+
+Several frameworks have been developed on top of Mesos.
+There is Cronos to work with distributed cron jobs and Marathon to run - docker - applications.
+
+From a Expedia standpoint, we have the capability to deploy Docker container in a Marathon cluster in our datacenter (Chandler).
+The whole cluster is part the https://confluence/display/ecptech/Stockyard[Stockyard project].
+
+[quote, Stockyard confluence page]
+Stockyard is ECP's platform for launching container-based applications - specifically using Docker. It provides a flat, scalable, robust platform powered by Apache Mesos.
+
+The goal of us is going to be able to deploy a simple application into a marathon cluster.
+
+NOTE: At this stage, you should already have a docker image published into the docker hub (otherwise have a look at the end of the lesson 0).
+
+==== How to deploy in Marathon?
+
+.The UI interface
+
+You should be able to access https://marathon.stockyard.karmalab.net/ui/#/apps[Marathon UI] and see.
+
+image::marathon-UI.png[]
+
+From this interface we are going to configure our awesome application.
+At this stage an application represents a long-running service, of which there would be many instances running on multiple hosts.
+
+Applications can be grouped to facilitate the maintenance.
+And we are going to use the https://marathon.stockyard.karmalab.net/ui/#/group/%2Fcode-academy-docker4devs[code-academy-docker4devs group] for this lesson.
+
+The next step is to create an application.
+On the top right corner of the page there is a blue button "Create Application", let's click on it.
+
+You should be able to see the following modal
+
+image::new-app-modal.png[]
+
+As our application is very simple we won't tweak the parameter to much.
+
+For the ID (the name of our application), are going to follow this pattern `/code-academy-docker4devs/<YOUR USERNAME>-<NAME OF YOUR APP>`
+
+For example as my application is simply named `nginx`, the ID will then `/code-academy-docker4devs/gscheibel-nginx`.
+
+Under the `Docker container` section we are going to provide 2 information:
+- Image: the full name of your image (including tag if needed), as you would use for a `docker pull` command (in my case `gscheibel/expedia-docker-for-devs:nginx`)
+- Network: Select bridge to facilitate port mapping
+
+For the port mapping section, as we have selected a `Bridge` strategy all we have to do is to provide the ports exposed by the container and Marathon will then assign a host port.
+Following the example, my `nginx` container is listening (and exposing) its port 80 so the configuration will simply be:
+
+image::port-exposing.png[]
+
+Finally, but optional, we can add some health check capability to our application.
+For example, I know if send an HTTP request to my application targeting `/` (root path) and it responds under 300ms then the application is "healthy".
+Go to the `Health Check` section to add this capability.
+It's important when you want Marathon to auto scale your application.
+
+Everything seem to be OK, then image:create-app.png[]
+
+After some time, your application should be marked as `Running`.
+If you have added an health check, it will mark it (normally) as `healthy`.
+
+Looking overall like
+
+image::up-and-running.png[]
+
+==== How to test my application?
+
+For this lesson, we are not going to do any load balancer or DNS management so we going to hit the host directly.
+Under the `Instances` tab, you have all the running instances of your application.
+
+If you look carefully there is a link under your application instance ID
+
+In this example
+
+image::marathon-instance.png[]
+
+The instance ID is `code-academy-docker4devs_gscheibel-nginx.9379f2ef-13f4-11e7-99bf-1402ec34bda8` while the exposed endpoint is `chlxmesosslv007.karmalab.net:31212`.
+
+You can click on the endpoint to access your application directly.
+
+NOTE: By default the endpoint link uses HTTPS, don't forget to change it if your application only support HTTP.
+
+IF everything correctly we can expect:
+
+image::it-works.png[]
+
+=== Amazon EC2 Container Service (ECS)
+
+////
+A bit of description / explanations regarding the section topic
+
+.Exercise
+The exercise itself
+
+The admonition TIP of instance can be used to guide the attendee.
+
+.Expected output
+It can be a snippet of code (use the [source] block) or anything to show the course attendee it exercise is solved.
+
+The solution of the exercise should be inject via the solution file.
+include::solutions.adoc[tags=<Tag of the solution>]
+////
