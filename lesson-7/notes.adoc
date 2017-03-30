@@ -2,20 +2,20 @@ ifndef::full-version[]
 include::../headers.adoc[]
 :toc: macro
 :toc-title: What's the plan for this lesson?
-
+:nginx-image: gscheibel/expedia-docker-for-devs:nginx
 toc::[]
 endif::full-version[]
 
 == Lesson 7: Launch it and watch it fly
 
-Since the beginning of this course we learn how to create images and how to run containers.
-The last part of our journey is going to our deployment.
+Since the beginning of this course we've learnt how to create images and how to run containers.
+The last part of our journey is going to be about deployment.
 
 As we know, containers are an interesting solution to run an application but when comes the time to go to production we have to think about resiliency, monitoring etc.
-In this lesson we going to talk specifically 2 cluster management solutions: Mesos/Marathon and Amazon ECS.
+In this lesson we going to talk specifically 2 cluster management solutions: *Mesos/Marathon* and *Amazon ECS*.
 
 The goal is to deploy manually our application in both of these solutions.
-Even if in _real life_ we would automate the deployment processes using each solutions API (like what Primer is doing for EWE).
+Even if in _real life_ we would automate the deployment processes using each solution's API (like what Primer is doing for EWE).
 
 NOTE: There are several other solutions like Kubernetes but we won't have the time work with them.
 
@@ -28,21 +28,23 @@ http://mesos.apache.org/[Mesos] allows developers to _see_ a cluster of machines
 It takes care of the downstream resource management.
 
 Several frameworks have been developed on top of Mesos.
-There is Cronos to work with distributed cron jobs and Marathon to run - docker - applications.
+There is Cronos to deal with distributed cron jobs and Marathon to run - docker - applications.
 
-From a Expedia standpoint, we have the capability to deploy Docker container in a Marathon cluster in our datacenter (Chandler).
+From an Expedia standpoint, we have the capability to deploy Docker container in a Marathon cluster in our datacenter (Chandler).
 The whole cluster is part the https://confluence/display/ecptech/Stockyard[Stockyard project].
 
 [quote, Stockyard confluence page]
 Stockyard is ECP's platform for launching container-based applications - specifically using Docker. It provides a flat, scalable, robust platform powered by Apache Mesos.
 
-The goal of us is going to be able to deploy a simple application into a marathon cluster.
+The goal is going to be able to deploy a simple application into a marathon cluster.
 
-NOTE: At this stage, you should already have a docker image published into the docker hub (otherwise have a look at the end of the lesson 0).
+[NOTE]
+--
+At this stage, you should already have a docker image published into the docker hub (otherwise have a look at the end of the lesson 0).
+If needed we can reuse `{nginx-image}`.
+--
 
 ==== How to deploy in Marathon?
-
-.The UI interface
 
 You should be able to access https://marathon.stockyard.karmalab.net/ui/#/apps[Marathon UI] and see.
 
@@ -61,14 +63,15 @@ You should be able to see the following modal
 
 image::new-app-modal.png[align=center]
 
-As our application is very simple we won't tweak the parameter to much.
+As our application is very simple we won't tweak the parameter too much.
 
 For the ID (the name of our application), are going to follow this pattern `/code-academy-docker4devs/<YOUR USERNAME>-<NAME OF YOUR APP>`
 
 For example as my application is simply named `nginx`, the ID will then `/code-academy-docker4devs/gscheibel-nginx`.
 
 Under the `Docker container` section we are going to provide 2 information:
-- Image: the full name of your image (including tag if needed), as you would use for a `docker pull` command (in my case `gscheibel/expedia-docker-for-devs:nginx`)
+
+- Image: the full name of your image (including tag if needed), as you would use for a `docker pull` command (in my case `{nginx-image}`)
 - Network: Select bridge to facilitate port mapping
 
 For the port mapping section, as we have selected a `Bridge` strategy all we have to do is to provide the ports exposed by the container and Marathon will then assign a host port.
@@ -92,7 +95,7 @@ image::up-and-running.png[align=center]
 
 ==== How to test my application?
 
-For this lesson, we are not going to do any load balancer or DNS management so we going to hit the host directly.
+For this lesson, we are not going to do any load balancer or DNS management so we are going to hit the host directly.
 Under the `Instances` tab, you have all the running instances of your application.
 
 If you look carefully there is a link under your application instance ID
@@ -105,9 +108,9 @@ The instance ID is `code-academy-docker4devs_gscheibel-nginx.9379f2ef-13f4-11e7-
 
 You can click on the endpoint to access your application directly.
 
-NOTE: By default the endpoint link uses HTTPS, don't forget to change it if your application only support HTTP.
+NOTE: By default the endpoint link uses HTTPS, don't forget to change it if your application only supports HTTP.
 
-IF everything correctly we can expect:
+If everything correctly we can expect:
 
 image::it-works.png[align=center]
 
@@ -145,7 +148,7 @@ Go to the `Task Definitions` and click on `Create new Task Definition`.
 
 In our case our task definition will have the following characteristics:
 
-* Task definition name => use `<USERNAME>-<APP-NAME>` (eg gscheibel-nginx)
+* Task definition name: use `<USERNAME>-<APP-NAME>` (eg `gscheibel-nginx`)
 * Task role: empty
 * Network Mode: Bridge
 

@@ -6,7 +6,6 @@ ifndef::full-version[]
 :imagesdir: ../material/images/
 :stylesdir: ../
 :stylesheet: expedia.css
-:toc-title: We will cover
 endif::full-version[]
 
 [.logos]
