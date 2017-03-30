@@ -113,17 +113,94 @@ image::it-works.png[align=center]
 
 === Amazon EC2 Container Service (ECS)
 
-////
-A bit of description / explanations regarding the section topic
+:cluster-name: codeacademy-docker4devs
 
-.Exercise
-The exercise itself
+Another way to deploy container is by using https://aws.amazon.com/ecs/[Amazon EC2 Container Service] aka ECS.
 
-The admonition TIP of instance can be used to guide the attendee.
+In a nutshell ECS is
 
-.Expected output
-It can be a snippet of code (use the [source] block) or anything to show the course attendee it exercise is solved.
+[quote, ECS landing page]
+Amazon EC2 Container Service (ECS) is a highly scalable, high performance container management service that supports Docker containers and allows you to easily run applications on a managed cluster of Amazon EC2 instances.
 
-The solution of the exercise should be inject via the solution file.
-include::solutions.adoc[tags=<Tag of the solution>]
-////
+For this course we are going to focus on deploying 1 container in ECS.
+To do that the first step is to log into the https://aws-sso.tools.expedia.com[AWS console] with your SEA credentials.
+Then select the `EWEDEV_Admins` account.
+
+As you can imaging we are going to focus only on the ECS part of AWS.
+And to dive into it, let's go to the ECS console by selecting the ECS service in the search bar:
+
+image::ecs-portal.png[align=center]
+
+Once in the ECS page, you should be able to see a list of ECS cluster (group of EC2 instances used to deploy containers).
+Today we will be using `{cluster-name}`.
+
+But before looking deeper into the cluster, let's have a look at another concept called `Task`.
+
+==== Task definitions
+
+A task describes a set of information regarding how to run an application.
+It's fairly similar to what we did with Docker Compose in the previous lessons.
+
+Go to the `Task Definitions` and click on `Create new Task Definition`.
+
+In our case our task definition will have the following characteristics:
+
+* Task definition name => use `<USERNAME>-<APP-NAME>` (eg gscheibel-nginx)
+* Task role: empty
+* Network Mode: Bridge
+
+Then add a container, which would look like:
+
+* Container name: whatever you want to
+* Image: the complete name as you would use to perform a `docker pull` (eg: `gscheibel/expedia-docker-for-devs:nginx`)
+* Memory limit: 128MB would be enough
+* Port mapping:
+** Host: something between 49201 and 49300
+** Container: the port exposed by your application (like 80 for a default HTTP routing)
+
+That would be enough even if we could easily add more informations with environment variable, labels etc.
+
+Once the container has been added, your Task definition should look like:
+
+image::create-task-definition.png[align=center]
+
+NOTE: Tasks are versioned, which is helpful for some maintenance and evolutions
+
+==== Deploying
+
+Now we have our task created, let's go back to our {cluster-name} cluster and https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters/codeacademy-docker4devs/runTask[run a task].
+
+First select the task definition you've just created (the `:1` means it's the first version).
+Select the {cluster-name} cluster leave the rest as is.
+
+image::run-task.png[align=center]
+
+And after a bit of time the task should be `RUNNING`
+
+image::task-running.png[align=center]
+
+==== Testing in production
+
+Now our application is running let's try to ping it.
+For the purpose of this course, there is no "advanced" network like load balancer or domain name.
+And to simplify the exercise we only use 1 shared EC2 instance.
+
+To reach our application we are going to use the public DNS entry (pre-set by AWS) being: `ec2-54-202-95-72.us-west-2.compute.amazonaws.com`.
+
+As my `gscheibel-nginx` container has been mapped to port `49200` (in my Task definition) I can simply do:
+
+[source]
+----
+$ curl ec2-54-202-95-72.us-west-2.compute.amazonaws.com:49200/expedia.html
+
+<html>
+<head>
+  <title>docker4devs</title>
+</head>
+<body>
+  <h1>Hello World - Docker 4 devs</h1>
+</body>
+</html>
+----
+
+NOTE: The office network restriction blocks most of the request on "non-standard" port, if it doesn't work re-try while being connected to the corporate VPN.
